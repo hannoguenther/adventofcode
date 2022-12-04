@@ -1,7 +1,7 @@
 import java.io.File
 
 fun day1() {
-    val elvesTotalCalories: List<Int> = File("inputs/01.txt")
+    val elvesTotalCalories: List<Int> = File("input/01.txt")
         .readText()
         .split("\n\n")
         .map { elfSnacksText: String ->
