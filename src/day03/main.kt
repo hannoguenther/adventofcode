@@ -1,7 +1,9 @@
+package day03
+
 import java.io.File
 
-fun day3() {
-    val rucksacks = File("input/03.txt").readLines()
+fun main() {
+    val rucksacks = File("src/day03/input.txt").readLines()
 
     fun Char.priority() = if (isLowerCase()) {
         1 + code - 'a'.code

@@ -1,51 +1,22 @@
+package day02
+
 import java.io.File
 
-private sealed interface Shape {
-    val value: Int
-    infix fun battle(other: Shape): Int
-}
 
-private object Rock : Shape {
-    override val value: Int = 1
-    override infix fun battle(other: Shape) = when (other) {
-        Rock -> 3
-        Paper -> 0
-        Scissor -> 6
-    }
-}
+fun main() {
+    data class EncodedStrategy(val other: String, val mine: String)
 
-private object Paper : Shape {
-    override val value: Int = 2
-    override infix fun battle(other: Shape) = when (other) {
-        Rock -> 6
-        Paper -> 3
-        Scissor -> 0
-    }
-}
+    val encodedStrategies: List<EncodedStrategy> = File("src/day02/input.txt")
+        .readLines()
+        .map { line ->
+            val (other, mine) = line.split(' ')
+            EncodedStrategy(other, mine)
+        }
 
-private object Scissor : Shape {
-    override val value: Int = 3
-    override infix fun battle(other: Shape) = when (other) {
-        Rock -> 0
-        Paper -> 6
-        Scissor -> 3
-    }
-}
-
-private data class EncodedStrategy(val other: String, val mine: String)
-
-private val encodedStrategies: List<EncodedStrategy> = File("input/02.txt")
-    .readLines()
-    .map { line ->
-        val (other, mine) = line.split(' ')
-        EncodedStrategy(other, mine)
+    fun pointsOfRockPaperScissorBattle(other: Shape, mine: Shape): Int {
+        return mine.value + (mine battle other)
     }
 
-private fun pointsOfRockPaperScissorBattle(other: Shape, mine: Shape): Int {
-    return mine.value + (mine battle other)
-}
-
-fun day2() {
     fun EncodedStrategy.otherShape(): Shape = when (other) {
         "A" -> Rock
         "B" -> Paper
