@@ -1,25 +1,15 @@
-buildscript {
-    ext.kotlin_version = '1.7.20'
-}
-
 plugins {
     id 'java-library'
-    id "org.jetbrains.kotlin.jvm" version "$kotlin_version"
+    id "org.jetbrains.kotlin.jvm" version "1.7.20"
 }
 
 dependencies {
     testImplementation 'junit:junit:4.+'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.21'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    sourceSets {
-        main.java.srcDir("src")
-    }
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+    sourceSets.main.java.srcDir("src")
 }
 
 repositories {
