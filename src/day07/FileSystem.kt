@@ -47,13 +47,11 @@ object FileSystem {
                 if (currentCommand == "cd") {
                     currentDir = when (val arg = s[2]) {
                         "/" -> root
-                        ".." -> requireNotNull(currentDir.parent)
+                        ".." -> currentDir.parent ?: return@forEachLine
                         else -> currentDir.childDir(arg)
                     }
                 }
-                return@forEachLine
-            }
-            if (currentCommand == "ls") {
+            } else if (currentCommand == "ls") {
                 if (s[0] == "dir") {
                     currentDir.childDir(s[1])
                 } else {
